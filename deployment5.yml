@@ -1,0 +1,28 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins-pod
+  labels:
+    type: proxy
+    author: ci-cd
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      type: proxy
+  template:
+    metadata:
+      name: myjenkins
+      labels:
+        type: proxy
+    spec:
+      containers:
+         - name: myjenkins
+           image: jenkins/jenkins
+           ports:
+             - containerPort: 8080
+               hostPort: 9090
+...       
+
+
